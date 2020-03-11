@@ -21,12 +21,32 @@ namespace :generate_fake_users do
     records_array = ActiveRecord::Base.connection.execute(sql)
 
     puts records_array
-
     puts records_array.count
 
     records_array.each do |row|
       puts row
+      fake_user = FakeUser.new(row)
+
+      fake_user_first_name = fake_user.first_name
+      fake_user_last_name = fake_user.last_name
+
+      if FakeUser.where(first_name: fake_user_first_name, last_name: fake_user_last_name).length > 0
+        puts "fake user already exists"
+      else
+        puts "fake user will be saved"
+        
+        if fake_user.save
+          puts "fake user is saved"
+        else
+          puts "failed to save fake user"
+          puts fake_user_first_name
+          puts fake_user_last_name
+        end
+      end
     end
+
+    puts "Total fake users in the db"
+    puts FakeUser.all.count
   end
 
 end
