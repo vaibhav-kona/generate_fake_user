@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'fake_user', to: 'fake_user#get'
   get 'users/get'
-  get 'users/put'
-  get 'users/post'
-  get 'users/delete'
+  # get 'users/put'
+  # get 'users/post'
+  # get 'users/delete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   get '/users', to: 'users#get'

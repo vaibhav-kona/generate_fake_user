@@ -1,0 +1,2 @@
+module FakeUserHelper
+end
