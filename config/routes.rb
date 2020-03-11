@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   post '/users', to: 'users#post'
 
-  put '/user/:userId', to: 'users#put'
+  put '/users/:user_id', to: 'users#put'
 
-  delete '/user/:userId', to: 'user#delete'
+  delete '/users/:user_id', to: 'users#delete'
 end
