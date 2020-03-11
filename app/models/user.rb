@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  validates :name, presence: true, uniqueness: { case_sensitive: true }, length: {maximum: 50}
+  validates :first_name, presence: true, uniqueness: { case_sensitive: true }, length: {maximum: 50}
 end
