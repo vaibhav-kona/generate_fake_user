@@ -6,7 +6,8 @@ class FakeUserController < ApplicationController
 
     seed = filtered_params[:seed]
     size = filtered_params[:size]
-    region = filtered_params[:region]
+    region = formatted_region(filtered_params[:region])
+    
 
     if seed
       fake_user_by_seed = FakeUser.find_by_id(seed)
@@ -48,8 +49,7 @@ class FakeUserController < ApplicationController
     elsif region
       p "region from params"
       p region
-      fakes_users_by_ids_for_region_param = FakeUser
-              .where(`region in (?)`, region)
+      fakes_users_by_ids_for_region_param = FakeUser.where('region in (?)', region)
       render json: {fake_user: fakes_users_by_ids_for_region_param}, status: 200
     
     else
@@ -79,5 +79,21 @@ class FakeUserController < ApplicationController
 
   def get_params
     params.permit(:size, :seed, :region => [])
+  end
+
+  def formatted_region (region)
+    p "region"
+    p region
+    formatted_values = []
+    if region
+       region.each do |val|
+        p "val"
+        p val
+        formatted_values.push(JSON.parse(val))
+      end
+      p "formatted_values"
+      p formatted_values
+      formatted_values
+    end
   end
 end
